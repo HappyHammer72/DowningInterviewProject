@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between">
+  <h1>Companies</h1>
+  <button type="button" class="btn btn-primary" [routerLink]="['/add-company']">
+    Add
+  </button>
+</div>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Current Share Price</th>
+    <th>Created Date</th>
+  </tr>
+  <tr *ngFor="let company of companies">
+    <td>{{ company.name }}</td>
+    <td>{{ company.code }}</td>
+    <td>{{ company.sharePrice | number : "0.5-5" }}</td>
+    <td>{{ company.createdDate | date : "dd-MMM-yyyy" }}</td>
+  </tr>
+</table>
+
+<div [hidden]="!errorMessage" class="alert alert-danger">{{ errorMessage }}</div>

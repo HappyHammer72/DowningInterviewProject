@@ -1,0 +1,72 @@
+<form [formGroup]="editForm">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name" />
+    <div
+      *ngIf="
+        !form['name']?.valid && (form['name']?.dirty || form['name']?.touched)
+      "
+    >
+      <div [hidden]="!form['name'].errors!.required">Name is required</div>
+      <div [hidden]="!form['name'].errors!.maxlength">
+        Name should be no longer than 100 characters
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="code" class="form-label">Code</label>
+    <input
+      uppercase
+      type="text"
+      class="form-control"
+      id="code"
+      formControlName="code"
+    />
+    <div
+      *ngIf="
+        !form['code']?.valid && (form['code']?.dirty || form['code']?.touched)
+      "
+    >
+      <div [hidden]="!form['code'].errors!.required">Code is required</div>
+      <div [hidden]="!form['code'].errors!.maxlength">
+        Code should be no longer than 10 characters
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="sharePrice" class="form-label">Share Price</label>
+    <input
+      numbersOnly
+      type="text"
+      class="form-control"
+      id="sharePrice"
+      formControlName="sharePrice"
+    />
+    <div
+      *ngIf="
+        !form['sharePrice']?.valid &&
+        (form['sharePrice']?.dirty || form['sharePrice']?.touched)
+      "
+    >
+      <div [hidden]="!form['sharePrice'].errors!.required">
+        Share price is required
+      </div>
+      <div [hidden]="!form['sharePrice'].errors!.maxlength">
+        Share price should be no longer than 10 characters
+      </div>
+    </div>
+  </div>
+  <button
+    type="submit"
+    [disabled]="!editForm.valid"
+    class="btn btn-primary"
+    (click)="save()"
+  >
+    Save
+  </button>
+</form>
+
+<div [hidden]="!errorMessage" class="alert alert-danger mt-2">
+  {{ errorMessage }}
+</div>
